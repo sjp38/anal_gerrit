@@ -39,7 +39,7 @@ func printRawMarshalled(infos interface{}, depth int) {
         }
         pindent(depth, "}\n")
     case []interface{}:
-        pindent(depth, "[")
+        pindent(depth, "[\n")
         for k, v := range vinfos {
             pindent(depth + 1, "")
             switch vv := v.(type) {
@@ -82,5 +82,5 @@ func fetchChanges(status string, next_sort_key string) interface{} {
 }
 
 func main() {
-    printRawMarshalled(fetchChanges("open", FirstSortKey), 0)
+    printRawMarshalled(fetchChanges("merged", FirstSortKey), 0)
 }
