@@ -14,19 +14,19 @@ const (
     FirstSortKey = "002a4ecd00011ff0"
 )
 
-func pindent(depth int) {
+func pindent(depth int, str string) {
     for i := 0; i < depth; i++ {
         fmt.Print("    ")
     }
+    fmt.Print(str)
 }
 
 func printRawMarshalled(infos interface{}, depth int) {
     switch vinfos := infos.(type) {
     case map[string]interface{}:
-        pindent(depth)
-        fmt.Println("{")
+        pindent(depth, "{\n")
         for k, v := range vinfos {
-            pindent(depth + 1)
+            pindent(depth + 1, "")
             switch vv := v.(type) {
             case string:
                 fmt.Printf("%v: (string) - %q\n", k, vv)
@@ -37,13 +37,11 @@ func printRawMarshalled(infos interface{}, depth int) {
                 printRawMarshalled(v, depth + 1)
             }
         }
-        pindent(depth)
-        fmt.Printf("}\n")
+        pindent(depth, "}\n")
     case []interface{}:
-        pindent(depth)
-        fmt.Println("[")
+        pindent(depth, "[")
         for k, v := range vinfos {
-            pindent(depth + 1)
+            pindent(depth + 1, "")
             switch vv := v.(type) {
             case string:
                 fmt.Printf("%vth: (string) - %q\n", k, vv)
@@ -54,8 +52,7 @@ func printRawMarshalled(infos interface{}, depth int) {
                 printRawMarshalled(v, depth + 1)
             }
         }
-        pindent(depth)
-        fmt.Printf("]\n")
+        pindent(depth, "]\n")
     }
 }
 
