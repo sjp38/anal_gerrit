@@ -26,7 +26,7 @@ func printRawMarshalled(infos interface{}, depth int) {
         pindent(depth)
         fmt.Println("{")
         for k, v := range vinfos {
-            pindent(depth)
+            pindent(depth + 1)
             switch vv := v.(type) {
             case string:
                 fmt.Printf("%v: (string) - %q\n", k, vv)
@@ -43,7 +43,7 @@ func printRawMarshalled(infos interface{}, depth int) {
         pindent(depth)
         fmt.Println("[")
         for k, v := range vinfos {
-            pindent(depth)
+            pindent(depth + 1)
             switch vv := v.(type) {
             case string:
                 fmt.Printf("%vth: (string) - %q\n", k, vv)
