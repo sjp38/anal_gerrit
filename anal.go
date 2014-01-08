@@ -24,40 +24,42 @@ func printRawMarshalled(infos interface{}, depth int) {
     switch vinfos := infos.(type) {
     case map[string]interface{}:
         pindent(depth)
-        fmt.Println("is a map:")
+        fmt.Println("{")
         for k, v := range vinfos {
             switch vv := v.(type) {
             case string:
         pindent(depth)
-                fmt.Printf("%v: is string - %q\n", k, vv)
+                fmt.Printf("%v: (string) - %q\n", k, vv)
             case int:
         pindent(depth)
-                fmt.Printf("%v: is int - %q\n", k, vv)
+                fmt.Printf("%v: (int) - %q\n", k, vv)
             default:
         pindent(depth)
-                fmt.Printf("%v: \n", k)
+                fmt.Printf("%v: (not string, neither int)\n", k)
                 printRawMarshalled(v, depth + 1)
             }
         }
-        fmt.Printf("\n")
+        pindent(depth)
+        fmt.Printf("}\n")
     case []interface{}:
         pindent(depth)
-        fmt.Println("is an array:")
+        fmt.Println("[")
         for k, v := range vinfos {
             switch vv := v.(type) {
             case string:
         pindent(depth)
-                fmt.Printf("%v: is string - %q\n", k, vv)
+                fmt.Printf("%vth: (string) - %q\n", k, vv)
             case int:
         pindent(depth)
-                fmt.Printf("%v: is int - %q\n", k, vv)
+                fmt.Printf("%vth: (int) - %q\n", k, vv)
             default:
         pindent(depth)
-                fmt.Printf("%v: \n", k)
+                fmt.Printf("%vth: (not string, neither int)\n", k)
                 printRawMarshalled(v, depth + 1)
             }
         }
-        fmt.Printf("\n")
+        pindent(depth)
+        fmt.Printf("]\n")
     }
 }
 
