@@ -33,7 +33,7 @@ func printRawMarshalled(infos interface{}, depth int) {
 			case int:
 				fmt.Printf("%v: (int) - %q\n", k, vv)
 			default:
-				fmt.Printf("%v: (not string, neither int)\n", k)
+				fmt.Printf("%v: (%T)\n", k, vv)
 				printRawMarshalled(v, depth+1)
 			}
 		}
@@ -48,7 +48,7 @@ func printRawMarshalled(infos interface{}, depth int) {
 			case int:
 				fmt.Printf("%vth: (int) - %q\n", k, vv)
 			default:
-				fmt.Printf("%vth: (not string, neither int)\n", k)
+				fmt.Printf("%vth: (%T)\n", k, vv)
 				printRawMarshalled(v, depth+1)
 			}
 		}
